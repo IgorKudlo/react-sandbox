@@ -47,7 +47,7 @@ document
     const payload = Math.floor(Math.random()*10);
     store.dispatch({
       type: 'RND',
-      payload
+      payload: payload
     });
   });
 
