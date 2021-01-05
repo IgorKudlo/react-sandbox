@@ -29,26 +29,35 @@ const store = createStore(reducer);
 store.dispatch({type: 'INC'});
 store.dispatch({type: 'INC'});*/
 
+const inc = () => {
+  return { type: 'INC' }
+}
+
+const dec = () => {
+  return { type: 'DEC' }
+}
+
+const rnd = (payload) => {
+  return { type: 'DEC', payload: payload }
+}
+
 document
     .getElementById('inc')
     .addEventListener('click', () => {
-        store.dispatch({type: 'INC'});
+        store.dispatch(inc());
     });
 
 document
   .getElementById('dec')
   .addEventListener('click', () => {
-      store.dispatch({type: 'DEC'});
+      store.dispatch(dec());
   });
 
 document
   .getElementById('rnd')
   .addEventListener('click', () => {
     const payload = Math.floor(Math.random()*10);
-    store.dispatch({
-      type: 'RND',
-      payload: payload
-    });
+    store.dispatch(rnd(payload));
   });
 
 const update = () => {
