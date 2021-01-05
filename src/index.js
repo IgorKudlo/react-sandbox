@@ -1,4 +1,9 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { createStore, bindActionCreators } from "redux";
+
+import Counter from "./counter";
+
 import reducer from "./reducer";
 import { inc, dec, rnd } from "./actions";
 
@@ -11,25 +16,20 @@ const { incDispatch, decDispatch, rndDispatch } = bindActionCreators({
   rndDispatch: rnd,
 }, dispatch);
 
-document
-    .getElementById('inc')
-    .addEventListener('click', incDispatch);
-
-document
-  .getElementById('dec')
-  .addEventListener('click', decDispatch);
-
-document
-  .getElementById('rnd')
-  .addEventListener('click', () => {
-    const payload = Math.floor(Math.random()*10);
-    rndDispatch(payload);
-  });
-
 const update = () => {
-  document
-    .getElementById('counter')
-    .innerHTML = store.getState();
+  ReactDOM.render(
+    <Counter
+      counter={store.getState()}
+      inc={incDispatch}
+      dec={decDispatch}
+      rnd={() => {
+        const value = Math.floor(Math.random()*10);
+        rndDispatch(value);
+      }}
+    />,
+    document.getElementById("root"));
 };
+
+update();
 
 store.subscribe(update);
