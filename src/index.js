@@ -1,45 +1,8 @@
 import { createStore } from "redux";
-
-const reducer = (state, action) => {
-
-    if (state === undefined) {
-        return 0;
-    }
-
-    switch (action.type) {
-        case 'RND':
-          return state + action.payload;
-
-        case 'INC':
-            return state + 1;
-
-        case 'DEC':
-            return state - 1;
-
-        default:
-            return state;
-    }
-};
+import reducer from "./reducer";
+import { inc, dec, rnd } from "./actions";
 
 const store = createStore(reducer);
-/*store.subscribe(() => {
-    console.log(store.getState());
-});
-
-store.dispatch({type: 'INC'});
-store.dispatch({type: 'INC'});*/
-
-const inc = () => {
-  return { type: 'INC' }
-}
-
-const dec = () => {
-  return { type: 'DEC' }
-}
-
-const rnd = (payload) => {
-  return { type: 'DEC', payload: payload }
-}
 
 document
     .getElementById('inc')
